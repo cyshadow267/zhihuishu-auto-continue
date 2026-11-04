@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "自动续播 · 智慧树",
+  "version": "1.5.1",
+  "description": "视频暂停后自动恢复播放，播完自动进入下一节。不修改播放进度上报，不跳过弹题。",
+  "permissions": ["storage"],
+  "host_permissions": ["*://*.zhihuishu.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["*://*.zhihuishu.com/*"],
+      "js": ["src/content.js"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "action": {
+    "default_title": "自动续播 · 智慧树",
+    "default_popup": "src/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
