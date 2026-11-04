@@ -409,6 +409,14 @@ groupHeader.addEventListener('click', () => {
     el.className = 'chapter-item';
     el.textContent = t;
     el._rect = { left: 40, top: 1460 + i * 48, width: 260, height: 40 };
+    /* 和真实平台一致：点中哪条，高亮就移到哪条。缺了这一步，
+       推进一步后"当前项"不变，扩展会被判定为"还在同一条"而重复点击。 */
+    el.addEventListener('click', () => {
+      [...items, ...newLeaves].forEach((o) => {
+        o.className = 'chapter-item';
+      });
+      el.className = 'chapter-item active';
+    });
     catalog.appendChild(el);
     newLeaves.push(el);
   });
@@ -437,14 +445,17 @@ document._register(thumb);
 setSetting('pptDwellMs', 300);
 setSetting('videoWaitMs', 500);
 
+const totalBefore = [...items, ...newLeaves].reduce((s, el) => s + (el.clickCount || 0), 0);
+
 video.currentSrc = 'https://x/lesson10.mp4';
 video.ended = true;
 video.paused = true;
 await sleep(2600);
+const totalAfter = [...items, ...newLeaves].reduce((s, el) => s + (el.clickCount || 0), 0);
 check(
   '缩略图视频不算播放器',
-  (thumb.playCalls || 0) === 0 && (newLeaves[0].clickCount || 0) === 2,
-  `缩略图play=${thumb.playCalls || 0} 新条目=${newLeaves[0].clickCount || 0}`
+  (thumb.playCalls || 0) === 0 && totalAfter === totalBefore + 1,
+  `缩略图play=${thumb.playCalls || 0} 点击 ${totalBefore}→${totalAfter}`
 );
 
 const failed = results.filter((r) => !r.ok);
