@@ -9,12 +9,28 @@
 
 ## 安装
 
-1. 打开 `chrome://extensions`（Edge 是 `edge://extensions`）；
-2. 右上角打开「开发者模式」；
-3. 点「加载已解压的扩展程序」，选择本目录 `D:\zhihuishu`；
-4. 打开智慧树课程页面，工具栏图标出现即生效（图标可固定到工具栏）。
+扩展没有上架应用商店，需要手动「加载已解压的扩展程序」。两种方式任选其一。
 
-改代码后回到扩展页点一下刷新按钮，再刷新课程页即可。
+### 方式一：下载打包版（最省事）
+
+1. 到 [Releases](../../releases) 下载最新的 `zhihuishu-auto-continue-vX.Y.Z.zip`；
+2. 解压到一个你不会随手删掉的目录；
+3. 打开 `chrome://extensions`（Edge 是 `edge://extensions`），打开右上角的「开发者模式」；
+4. 点「加载已解压的扩展程序」，选中解压出来的那个文件夹（里面能直接看到 `manifest.json`）。
+
+### 方式二：从源码
+
+```bash
+git clone https://github.com/cyshadow267/zhihuishu-auto-continue.git
+```
+
+然后在 `chrome://extensions` 里「加载已解压的扩展程序」，选中仓库目录。
+
+### 装好之后
+
+打开智慧树课程页面，页面右下角会出现「自动续播 vX.Y.Z 已加载」，工具栏图标出现即生效（建议固定到工具栏）。
+
+改了代码要生效：回到扩展页点该扩展的刷新按钮，再刷新课程页。
 
 ## 使用
 
